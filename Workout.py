@@ -2,6 +2,8 @@
 
 """Run this script to have your mac speak out the steps of a seven minute workout"""
 
+#Hi, I'm John
+
 import sys, os
 import time
 import subprocess
