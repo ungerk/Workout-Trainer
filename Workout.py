@@ -1,32 +1,25 @@
 #!/usr/bin/env python
 
-"""Run this script to have your mac speak out the steps of a seven minute workout"""
-
-#Hi, I'm John
+"""Run this script to have your mac speak out the steps of a 15 minute workout"""
 
 import sys, os
 import time
 import subprocess
 
+# Selected voices to choose from
 voices = ['Daniel','Samantha']
 
-
-# commands given to subprocess have to be a list of each keyword
-# you don't include any spaces.
-# example_command = ['say', '-v', 'Karen', 'Hello']
-# subprocess.call(example_command)
-# this will send the command to the terminal just as if you had typed:
-# > say -v 'Karen' 'Hello'
-
-# to use the timer for say, 10 seconds, do:
-# time.sleep(10)
-
+# Define function that speaks the input and accounts for the time it takes to do so
 def say(s):
 	a = time.time()
 	subprocess.call(['say','-v','Samantha',s])
 	b = time.time()
 	return b-a
-	
+
+# Define function that speaks each exercise and the one following it, along with time remaining
+# Last time through the loop has slightly altered text
+# t enables accounting for time taken to speak text
+# Each exercise is done for one minute
 def workout(name1,name2):
 	t = say('Begin %s' % name1)
 	time.sleep(15)
@@ -67,11 +60,13 @@ def workout(name1,name2):
 	else:
 		t = say('Workout complete. Good job!')
 
+# Define tuple of exercises ('stop' listed at end to enable alternate speech during last exercise)
 exercises = ('jumping jacks','wall sit','pushups','crunches',
-			'chair step-ups','squats','tricep dips','plank',
-			'high kneed running in place','lunges','pushups with rotation',
-			'side plank','stop')
+		'chair step-ups','squats','tricep dips','plank',
+		'high kneed running in place','lunges','pushups with rotation',
+		'side plank','stop')
 
+# Run workout function for each exercise, inputting current and next exercise
 for i in range(0,len(exercises)):
 	workout(exercises[i],exercises[i+1])
 
